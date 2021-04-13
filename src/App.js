@@ -5,15 +5,7 @@ import shortid from 'shortid'
 
 const App = () => {
   const [todos, setTodos] = useState([
-    {
-      content: '課題をする'
-    },
-    {
-      content: '洗濯をする'
-    },
-    {
-      content: '電話をする'
-    }
+    
   ])
 
   const addTodo = content => {
@@ -31,11 +23,11 @@ const App = () => {
 }
 
   return (
-    <>
+    <React.Fragment>
       <h1>Hello World!</h1>
       <Form addTodo={addTodo} />
       <List todos={todos} deleteTodo={deleteTodo}/>
-    </>
+    </React.Fragment>
   )
 }
 
