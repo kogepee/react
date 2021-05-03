@@ -1,33 +1,29 @@
-import React, { useState } from 'react'
-import Form from './Form'
-import List from './List'
-import shortid from 'shortid'
+import React from 'react'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import Room from './pages/Room'
+
+import {AuthProvider} from './AuthService'
+import LoggedInRoute from './LoggedInRoute'
 
 const App = () => {
-  const [todos, setTodos] = useState([
-    
-  ])
-
-  const addTodo = content => {
-    setTodos([
-      ...todos,
-      {
-        content: content,
-        id: shortid.generate()
-      }
-    ])
-  }
-
-  const deleteTodo = id => {
-    setTodos(todos.filter(todo => todo.id !== id))
-}
-
   return (
-    <React.Fragment>
-      <h1>Hello World!</h1>
-      <Form addTodo={addTodo} />
-      <List todos={todos} deleteTodo={deleteTodo}/>
-    </React.Fragment>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <LoggedInRoute exact path='/' component={Room}/>
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={SignUp} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   )
 }
 
